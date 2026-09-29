@@ -5,6 +5,8 @@ import com.example.Wastepickupfinal.service.pickuplogservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,7 +17,7 @@ public class pickuplogcontroller {
     private pickuplogservice pickuplogservice;
 
     @PostMapping
-    public pickuplog addPickupLog(@RequestBody pickuplog pickuplog) {
+    public pickuplog addPickupLog(@Valid @RequestBody pickuplog pickuplog) {
         return pickuplogservice.addPickupLog(pickuplog);
     }
 
@@ -34,4 +36,10 @@ public class pickuplogcontroller {
         pickuplogservice.deletePickupLog(id);
         return "Pickup log deleted successfully";
     }
+
+    @GetMapping("/zone-averages")
+    public Map<String, Double> getZoneWiseAverageScores() {
+        return pickuplogservice.getZoneWiseAverageScores();
+    }
+
 }

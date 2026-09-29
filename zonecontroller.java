@@ -34,4 +34,12 @@ public class zonecontroller {
         zoneservice.deleteZone(id);
         return "Zone deleted successfully";
     }
+
+    @PutMapping("/{id}")
+    public zone updateZone(
+            @PathVariable Long id,
+            @RequestBody zone zone) {
+
+        return zoneservice.updateZone(id, zone);
+    }
 }

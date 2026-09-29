@@ -28,4 +28,18 @@ public class zoneservice {
     public void deleteZone(Long id) {
         zonerepository.deleteById(id);
     }
+
+    public zone updateZone(Long id, zone zone) {
+
+        zone existingZone = zonerepository.findById(id).orElse(null);
+
+        if (existingZone == null) {
+            return null;
+        }
+
+        existingZone.setName(zone.getName());
+        existingZone.setMinimumScore(zone.getMinimumScore());
+
+        return zonerepository.save(existingZone);
+    }
 }
